@@ -1,6 +1,9 @@
 # This class is meant to be called from the locp-cassandra module.
 # It sets variables according to platform.
-class cassandra::params {
+class cassandra::paramso (
+  $config_path_set  = undef,
+  $java_package_set = undef,
+){
   case $::osfamily {
     'Debian': {
       case $::operatingsystemmajrelease {
@@ -45,8 +48,8 @@ class cassandra::params {
       }
 
       $cassandra_pkg = 'cassandra22'
-      $config_path = '/etc/cassandra/default.conf'
-      $java_package = 'java-1.8.0-openjdk-headless'
+      $config_path = $config_path_set
+      $java_package = $java_package_set
       $jna_package_name = 'jna'
       $optutils_package_name = 'cassandra22-tools'
       $systemctl = '/usr/bin/systemctl'
