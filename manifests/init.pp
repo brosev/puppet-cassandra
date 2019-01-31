@@ -139,6 +139,8 @@ class cassandra (
   $config_file_owner            = 'cassandra',
   $config_file_group            = 'cassandra',
   $config_path                  = $::cassandra::params::config_path,
+  $config_path_owner            = 'cassandra',
+  $config_path_group            = 'cassandra',
   $data_file_directories        = undef,
   $data_file_directories_mode   = '0750',
   $dc                           = 'DC1',
@@ -265,8 +267,8 @@ class cassandra (
   if $manage_config_file {
     file { $config_path:
       ensure  => directory,
-      group   => 'cassandra',
-      owner   => 'cassandra',
+      group   => $config_path_group,
+      owner   => $config_path_owner,
       mode    => '0755',
       require => $config_path_require,
     }
